@@ -1,8 +1,5 @@
 pipeline {
     agent any
-    tools{
-     jdk 'Java17'
-    }
     stages {
         stage('Clean workspace and Navigate to the folder'){
             steps{
