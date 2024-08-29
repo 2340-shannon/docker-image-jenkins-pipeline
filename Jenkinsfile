@@ -1,31 +1,33 @@
 pipeline {
     agent any
     stages {
-        stage('Clean workspace and Navigate to the folder'){
-            steps{
-                cleanWs()
-                bat 'copy C:\\Users\\Student\\Documents\\2315  C:\\Users\\Student\\AppData\\Local\\Jenkins\\.jenkins\\workspace\\pipelining'
-            }
-        }
-        stage('Build') {
+        stage('Checkout') {
             steps {
-                bat 'javac Pattern.java'
+                // Cloning the repository
+                git 'https://github.com/2340-shannon/docker-image-jenkins-pipeline'
             }
         }
-        stage('Jar') {
+        stage('Build Docker Image') {
             steps {
-                bat 'jar cfe myJar.jar Pattern Pattern.class'
+                script {
+                    // Building the Docker image
+                    sh 'docker build -t myapp:latest .'
+                }
             }
         }
-        stage('Run') {
+        stage('Run Docker Container') {
             steps {
-                bat 'java -jar myJar.jar'
+                script {
+                    // Running the Docker container in daemon mode
+                    sh 'docker run -d --name myapp-container myapp:latest'
+                }
             }
         }
-        stage('Artifact'){
-            steps{
-                archiveArtifacts artifacts: '*.jar', followSymlinks: false
-            }
+    }
+    post {
+        always {
+            // Cleanup or notification steps
+            echo 'Pipeline execution completed.'
         }
     }
 }
