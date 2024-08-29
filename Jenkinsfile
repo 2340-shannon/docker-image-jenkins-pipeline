@@ -4,14 +4,16 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Cloning the repository
-                git 'https://github.com/2340-shannon/docker-image-jenkins-pipeline'
+                bat '''git clone https://github.com/2340-shannon/docker-image-jenkins-pipeline.git
+git checkout main 
+'''
             }
         }
         stage('Build Docker Image') {
             steps {
                 script {
                     // Building the Docker image
-                    sh 'docker build -t myapp:latest .'
+                    bat 'docker build -t myapp:latest .'
                 }
             }
         }
@@ -19,7 +21,7 @@ pipeline {
             steps {
                 script {
                     // Running the Docker container in daemon mode
-                    sh 'docker run -d --name myapp-container myapp:latest'
+                    bat 'docker run -d --name myapp-container myapp:latest'
                 }
             }
         }
@@ -27,7 +29,7 @@ pipeline {
     post {
         always {
             // Cleanup or notification steps
-            echo 'Pipeline execution completed.'
+            bat 'echo \'Pipeline execution completed.\''
         }
     }
 }
