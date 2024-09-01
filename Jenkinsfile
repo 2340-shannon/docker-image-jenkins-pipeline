@@ -4,7 +4,7 @@ pipeline {
         stage('Checkout') {
             steps {
                 // Cloning the repository
-                bat '''git clone https://github.com/2340-shannon/docker-image-jenkins-pipeline.git
+                bat '''git clone https://github.com/shannonsequeira/docker-image-jenkins-pipeline.git
 git checkout main 
 '''
             }
@@ -13,7 +13,7 @@ git checkout main
             steps {
                 script {
                     // Building the Docker image
-                    bat 'docker build -t myapp:latest .'
+                    bat 'docker build -t my-pipeline:latest .'
                 }
             }
         }
@@ -21,7 +21,17 @@ git checkout main
             steps {
                 script {
                     // Running the Docker container in daemon mode
-                    bat 'docker run -d --name myapp-container myapp:latest'
+                    bat 'docker run -d --name my-pipeline-container my-pipeline:latest'
+                }
+            }
+        }
+    	stage('Push to Docker Hub') {
+            steps {
+                script {
+                    // Login to Docker Hub
+                    bat 'docker login -u dockermcauser -p #dock2024'
+                    // Push the Docker image to Docker Hub
+                    bat 'docker push my-pipeline:latest'
                 }
             }
         }
