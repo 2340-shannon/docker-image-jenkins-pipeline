@@ -13,7 +13,7 @@ git checkout main
             steps {
                 script {
                     // Building the Docker image
-                    bat 'docker build -t my-app:latest .'
+                    bat 'docker build -t dockermcauser/my-app:latest .'
                 }
             }
         }
