@@ -13,7 +13,7 @@ git checkout main
             steps {
                 script {
                     // Building the Docker image
-                    bat 'docker build -t dockermcauser/my-app:latest .'
+                    bat 'docker build -t my-app:latest .'
                 }
             }
         }
@@ -31,7 +31,7 @@ git checkout main
                     // Login to Docker Hub
                     bat 'docker login -u dockermcauser -p #dock2024'
                     // Push the Docker image to Docker Hub
-                    bat 'docker push my-app:latest'
+                    bat 'docker push dockermcauser/my-app:latest'
                 }
             }
         }
