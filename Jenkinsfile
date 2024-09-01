@@ -13,7 +13,7 @@ git checkout main
             steps {
                 script {
                     // Building the Docker image
-                    bat 'docker build -t my-pipeline:latest .'
+                    bat 'docker build -t my-app:latest .'
                 }
             }
         }
@@ -21,7 +21,7 @@ git checkout main
             steps {
                 script {
                     // Running the Docker container in daemon mode
-                    bat 'docker run -d --name my-pipeline-container my-pipeline:latest'
+                    bat 'docker run -d --name my-app-container my-app:latest'
                 }
             }
         }
@@ -31,7 +31,7 @@ git checkout main
                     // Login to Docker Hub
                     bat 'docker login -u dockermcauser -p #dock2024'
                     // Push the Docker image to Docker Hub
-                    bat 'docker push my-pipeline:latest'
+                    bat 'docker push my-app:latest'
                 }
             }
         }
