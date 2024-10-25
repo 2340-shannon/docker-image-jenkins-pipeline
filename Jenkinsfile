@@ -13,7 +13,7 @@ git checkout main
             steps {
                 script {
                     // Building the Docker image
-                    bat 'docker build -t my-app-pipe:latest .'
+                    bat 'docker build -t ubuntu .'
                 }
             }
         }
@@ -21,17 +21,7 @@ git checkout main
             steps {
                 script {
                     // Running the Docker container in daemon mode
-                    bat 'docker run -d --name my-app-pipe-container my-app-pipe:latest'
-                }
-            }
-        }
-    	stage('Push to Docker Hub') {
-            steps {
-                script {
-                    // Login to Docker Hub
-                    bat 'docker login -u dockermcauser -p #dock2024'
-                    // Push the Docker image to Docker Hub
-                    bat 'docker push dockermcauser/my-app-pipe:latest'
+                    bat 'docker run -d --name 2340 ubuntu'
                 }
             }
         }
